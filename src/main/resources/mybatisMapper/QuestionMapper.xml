@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dobby.dobbyqs.mybatis.mapper.QuestionMapper">
+    <resultMap id="BaseResultMap" type="dobby.dobbyqs.mybatis.pojo.Question">
+        <!--@mbg.generated-->
+        <!--@Table question-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="question" jdbcType="VARCHAR" property="question"/>
+        <result column="answer" jdbcType="INTEGER" property="answer"/>
+        <result column="explain" jdbcType="VARCHAR" property="explain"/>
+        <result column="tag" jdbcType="VARCHAR" property="tag"/>
+        <result column="subject_id" jdbcType="INTEGER" property="subjectId"/>
+        <result column="addition_id" jdbcType="INTEGER" property="additionId"/>
+        <result column="options_id" jdbcType="INTEGER" property="additionId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, `type`, question, answer, `explain`, tag, subject_id, addition_id, options_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+    select
+        <include refid="Base_Column_List"/>
+    from question
+    where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+    delete from question
+    where id = #{id,jdbcType=INTEGER}
+
+
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="dobby.dobbyqs.mybatis.pojo.Question"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+    insert into question (`type`, question, answer, 
+      `explain`, tag, subject_id,addition_id,options_id
+      )
+    values (#{type,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=INTEGER},
+      #{explain,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, #{subjectId,jdbcType=INTEGER},#{additionId,jdbcType=INTEGER},
+      #{optionsId,jdbcType=INTEGER}
+      )
+
+
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="dobby.dobbyqs.mybatis.pojo.Question"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+    insert into question
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="question != null">
+        question,
+            </if>
+            <if test="answer != null">
+        answer,
+            </if>
+            <if test="explain != null">
+        `explain`,
+            </if>
+            <if test="tag != null">
+        tag,
+            </if>
+            <if test="subjectId != null">
+        subject_id,
+            </if>
+            <if test="additionId != null">
+        addition_id,
+            </if>
+            <if test="optionsId != null">
+        options_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null">
+        #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+        #{answer,jdbcType=INTEGER},
+            </if>
+            <if test="explain != null">
+        #{explain,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="subjectId != null">
+        #{subjectId,jdbcType=INTEGER},
+            </if>
+            <if test="additionId != null">
+        #{additionId,jdbcType=INTEGER}
+            </if>
+            <if test="optionsId != null">
+        #{optionsId,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="dobby.dobbyqs.mybatis.pojo.Question">
+        <!--@mbg.generated-->
+    update question
+        <set>
+            <if test="type != null">
+                `type` = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null">
+        question = #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+        answer = #{answer,jdbcType=INTEGER},
+            </if>
+            <if test="explain != null">
+        `explain` = #{explain,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="subjectId != null">
+        subject_id = #{subjectId,jdbcType=INTEGER},
+            </if>
+            <if test="additionId != null">
+        addition_id = #{optionsId,jdbcType=INTEGER},
+            </if>
+            <if test="optionsId != null">
+        options_id = #{optionsId,jdbcType=INTEGER}
+            </if>
+        </set>
+    where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="dobby.dobbyqs.mybatis.pojo.Question">
+        <!--@mbg.generated-->
+    update question
+    set `type` = #{type,jdbcType=VARCHAR},
+      question = #{question,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=INTEGER},
+      `explain` = #{explain,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      subject_id = #{subjectId,jdbcType=INTEGER},
+      addition_id = #{additionId,jdbcType=INTEGER},
+      options_id = #{optionsId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List">
+        </include>
+    from question where true
+    </select>
+</mapper>
