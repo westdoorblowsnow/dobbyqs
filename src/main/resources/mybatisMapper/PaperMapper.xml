@@ -1,85 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dobby.dobbyqs.mybatis.mapper.PaperMapper">
-  <resultMap id="BaseResultMap" type="dobby.dobbyqs.mybatis.pojo.Paper">
-    <!--@mbg.generated-->
-    <!--@Table paper-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
-    <result column="tag" jdbcType="VARCHAR" property="tag" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, `name`, subject_id, tag
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from paper
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    <!--@mbg.generated-->
-    delete from paper
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="dobby.dobbyqs.mybatis.pojo.Paper" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into paper (`name`, subject_id, tag
-      )
-    values (#{name,jdbcType=VARCHAR}, #{subjectId,jdbcType=INTEGER}, #{tag,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="dobby.dobbyqs.mybatis.pojo.Paper" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into paper
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        `name`,
-      </if>
-      <if test="subjectId != null">
-        subject_id,
-      </if>
-      <if test="tag != null">
-        tag,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="subjectId != null">
-        #{subjectId,jdbcType=INTEGER},
-      </if>
-      <if test="tag != null">
-        #{tag,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="dobby.dobbyqs.mybatis.pojo.Paper">
-    <!--@mbg.generated-->
-    update paper
-    <set>
-      <if test="name != null">
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="subjectId != null">
+    <resultMap id="BaseResultMap" type="dobby.dobbyqs.mybatis.pojo.Paper">
+        <!--@mbg.generated-->
+        <!--@Table paper-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="subject_id" jdbcType="INTEGER" property="subjectId"/>
+        <result column="tag" jdbcType="VARCHAR" property="tag"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, `name`, subject_id, tag
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from dobbyqs.paper
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectLatest" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> from dobbyqs.paper where id = (SELECT max(id) FROM dobbyqs.paper);
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from dobbyqs.paper
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="dobby.dobbyqs.mybatis.pojo.Paper"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into dobbyqs.paper (`name`, subject_id, tag
+        )
+        values (#{name,jdbcType=VARCHAR}, #{subjectId,jdbcType=INTEGER}, #{tag,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="dobby.dobbyqs.mybatis.pojo.Paper"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into dobbyqs.paper
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="subjectId != null">
+                subject_id,
+            </if>
+            <if test="tag != null">
+                tag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="subjectId != null">
+                #{subjectId,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null">
+                #{tag,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="dobby.dobbyqs.mybatis.pojo.Paper">
+        <!--@mbg.generated-->
+        update dobbyqs.paper
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="subjectId != null">
+                subject_id = #{subjectId,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null">
+                tag = #{tag,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="dobby.dobbyqs.mybatis.pojo.Paper">
+        <!--@mbg.generated-->
+        update dobbyqs.paper
+        set `name` = #{name,jdbcType=VARCHAR},
         subject_id = #{subjectId,jdbcType=INTEGER},
-      </if>
-      <if test="tag != null">
-        tag = #{tag,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="dobby.dobbyqs.mybatis.pojo.Paper">
-    <!--@mbg.generated-->
-    update paper
-    set `name` = #{name,jdbcType=VARCHAR},
-      subject_id = #{subjectId,jdbcType=INTEGER},
-      tag = #{tag,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        tag = #{tag,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

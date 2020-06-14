@@ -50,7 +50,7 @@ public class Addition implements Serializable {
         }
         Addition other = (Addition) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getAddition() == null ? other.getAddition() == null : this.getAddition().equals(other.getAddition()));
+                && (this.getAddition() == null ? other.getAddition() == null : this.getAddition().equals(other.getAddition()));
     }
 
     @Override

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dobby.dobbyqs.web.openAPI.mapper.APIMapper">
+    <resultMap id="LittleQuestion" type="dobby.dobbyqs.web.openAPI.pojo.LittleQuestion">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="addition" jdbcType="VARCHAR" property="addition"/>
+        <result column="question" jdbcType="VARCHAR" property="question"/>
+        <result column="options" jdbcType="VARCHAR" property="optionsS"/>
+    </resultMap>
+
+    <resultMap id="AnswerAndExplain" type="dobby.dobbyqs.web.openAPI.pojo.AnswerAndExplain">
+        <result column="answer" jdbcType="INTEGER" property="answerI"/>
+        <result column="explain" jdbcType="VARCHAR" property="explain"/>
+    </resultMap>
+
+    <select id="getLittleQuestionById" parameterType="java.lang.Integer" resultMap="LittleQuestion">
+        select qs.id id,qs.question question,ad.`addition` `addition`,op.`options` `options`
+        from (dobbyqs.question qs,dobbyqs.`options` op) left join dobbyqs.`addition` ad
+        on ad.id = qs.addition_id
+        where qs.id = #{id,jdbcType=INTEGER} and op.id = qs.options_id
+    </select>
+    <select id="getAnswerAndExplain" resultType="dobby.dobbyqs.web.openAPI.pojo.AnswerAndExplain" resultMap="AnswerAndExplain">
+        select qs.answer answer,qs.`explain` `explain`
+        from dobbyqs.question qs
+        where qs.id = #{questionId,jdbcType=INTEGER}
+    </select>
+
+</mapper>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>latest 100 questions</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<style>
+    .question {
+        border: 1px solid #f78989;
+        border-radius: 5px;
+        padding: 0em 2em;
+        margin-bottom: 4px
+    }
+    .question_{
+        border-bottom: 2px solid #3a8ee6;
+    }
+</style>
+<body>
+<div class="main">
+    <div class="question" th:each="question :${questions}">
+        <p th:if="${question.getAddition()!=null}" th:text="${question.getAddition()}"></p>
+        <p class="question_"><span th:text="${question.getId()}"></span>.&emsp;<span th:text="${question.getQuestion()}"></span><span
+                style="float: right" th:text="${question.getGroup()}" th:if="${question.getGroup()}!=null"></span></p>
+        <ol type="A">
+            <li style="clear: none" th:each="option :${question.getOptions()}" th:text="${option}"></li>
+        </ol>
+        <p style="margin-left: 1em"><span th:text="${question.getAnswer()}"></span>&emsp;<span
+                th:text="${question.getExplain()}"></span></p>
+    </div>
+</div>
+</body>
+
+</html>

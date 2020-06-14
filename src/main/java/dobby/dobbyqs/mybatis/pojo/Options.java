@@ -50,7 +50,7 @@ public class Options implements Serializable {
         }
         Options other = (Options) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getOptions() == null ? other.getOptions() == null : this.getOptions().equals(other.getOptions()));
+                && (this.getOptions() == null ? other.getOptions() == null : this.getOptions().equals(other.getOptions()));
     }
 
     @Override

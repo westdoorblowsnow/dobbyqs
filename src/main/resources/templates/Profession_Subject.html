@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profession Subject</title>
+    <script src="vue/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .row {
+            text-align: center;
+        }
+        label{
+            width: 100px;
+            margin: 10px 50px;
+        }
+        input{
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="row">
+        <h1>添加专业</h1>
+    </div>
+    <div class="row">
+        <label>专业码</label><input id="code" type="text">
+    </div>
+    <div class="row">
+        <label>专业名</label><input id="profession" type="text">
+    </div>
+    <div class="row">
+        <button onclick="professionUp()">添加专业</button>
+    </div>
+    <div class="row">
+        <h2>添加科目</h2>
+    </div>
+    <div class="row">
+        <label>专业id</label><input id="professionId" type="number">
+    </div>
+    <div class="row">
+        <label>科目名</label><input id="subject" type="text">
+    </div>
+    <div class="row">
+        <button onclick="subjectUp()">添加科目</button>
+    </div>
+</div>
+</body>
+<script>
+    function professionUp() {
+        var data = {
+            code: $("#code").val(),
+            name: $("#profession").val()
+        }
+        alert(JSON.stringify(data));
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url: "/post/profession/insert",
+            //数据，json字符串
+            data: JSON.stringify(data),
+            //请求成功
+            success: function (result) {
+                console.log(result);
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+
+    function subjectUp() {
+        var data = {
+            professionId:$("#professionId").val(),
+            name:$("#subject").val()
+        }
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url: "/post/subject/insert",
+            //数据，json字符串
+            data: JSON.stringify(data),
+            //请求成功
+            success: function (result) {
+                console.log(result);
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+</script>
+</html>

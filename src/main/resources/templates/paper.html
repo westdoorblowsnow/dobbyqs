@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>paper</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .main {
+            width: 800px;
+            margin: 0 auto;
+        }
+        .right{
+            display: inline-block;
+            float: right;
+        }
+        .getQuestion{
+            /*display: inline-block;*/
+            /*max-width: 700px;*/
+            /*float: left;*/
+        }
+        .questionStr{
+            padding-bottom: 20px;
+            border-bottom: 1px solid #AAAAAA;
+        }
+        .group{
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .6), 0 0 8px rgba(0, 0, 0, .1);
+            border: 1px solid #222222;
+            padding: 8px 5px 10px 30px;
+            margin: 10px 0px;
+        }
+        .question{
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .3), 0 0 6px rgba(0, 0, 0, .05);
+            margin: 5px 5px 5px 0px;
+            padding: 0px 10px;
+            border: 1px solid #222222;
+        }
+        .paper{
+            margin: 20px 0px 200px;
+        }
+        #profession_subject{
+            margin-top: 40px;
+        }
+        #subject{
+            margin-left: 30px;
+        }
+        .question_img_div{
+            text-align: center;
+        }
+        .question_img{
+            width: 600px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="paper">
+        <h1 id="name"><span th:text="${name}"></span><span class="right" th:text="${id}"></span></h1>
+        <h3 id="profession_subject">
+            <span id="profession" th:text="${profession}"></span>
+            <span id="subject" th:text="${subject}"></span>
+        </h3>
+        <h3 id="tag" th:text="${tag}"></h3>
+    </div>
+
+    <div>
+        <h2><span>一、</span><span th:text="${A12}"></span></h2>
+        <div class="question A12" th:each="question : ${A12s}">
+            <div>
+                <h4 class="questionStr">
+                    <span class="left" th:text="${num.add1()+'.'}"></span>
+                    <span class="left getQuestion" th:text="${question.getQuestion()}"></span>
+                    <span class="right" th:text="${question.getId()}"></span>
+                </h4>
+                <div class="question_img_div" th:if="${questionDiagram.containsKey(question.getId()+'')}">
+                    <img  class="question_img" th:src="${'data:'+questionDiagram.get(question.getId()+'').getType()+';base64,'+questionDiagram.get(question.getId()+'').getDiagram()}" src="">
+                </div>
+            </div>
+            <ol class="options" type="A">
+                <li th:each="option : ${question.getOptions()}" th:text="${option}"></li>
+            </ol>
+            <p><span>答案：</span><span th:text="${question.getAnswer()}"></span></p>
+            <p th:unless="${question.getExplain()==null||question.getExplain().isEmpty()}"><span>解析：</span><span th:text="${question.getExplain()}"></span></p>
+        </div>
+    </div>
+    <div th:if="!${A34s.isEmpty()}">
+        <h2><span>二、</span><span th:text="${A34}"></span></h2>
+        <div class="group" th:each="questionGroup :${A34s}">
+            <h3 th:text="${'('+(num.getNum()+1)+'~'+(num.getNum()+groupedQuestion.get(questionGroup).size())+' 题共用题干)'}"></h3>
+            <h4 th:text="${groupedQuestion.get(questionGroup).get(0).getAddition()}"></h4>
+            <div class="question A34" th:each="question : ${groupedQuestion.get(questionGroup)}">
+                <h4 class="questionStr">
+                    <span class="left" th:text="${num.add1()+'.'}"></span>
+                    <span class="left getQuestion" th:text="${question.getQuestion()}"></span>
+                    <span class="right" th:text="${question.getId()}"></span>
+                </h4>
+                <ol class="options" type="A">
+                    <li th:each="option : ${question.getOptions()}" th:text="${option}"></li>
+                </ol>
+                <p><span>答案：</span><span th:text="${question.getAnswer()}"></span></p>
+                <p th:unless="${question.getExplain()==null||question.getExplain().isEmpty()}"><span>解析：</span><span th:text="${question.getExplain()}"></span></p>
+            </div>
+        </div>
+    </div>
+    <div th:if="!${Bs.isEmpty()}">
+        <h2><span th:if="${A34s.isEmpty()}">二、</span><span th:if="!${A34s.isEmpty()}">三、</span><span
+                th:text="${B}"></span></h2>
+        <div class="group" th:each="questionGroup :${Bs}">
+            <h3 th:text="${'('+(num.getNum()+1)+'~'+(num.getNum()+groupedQuestion.get(questionGroup).size())+' 题共用备选答案)'}"></h3>
+            <ol class="options" type="A">
+                <li th:each="option :${groupedQuestion.get(questionGroup).get(0).getOptions()}" th:text="${option}"></li>
+            </ol>
+            <h4 th:if="!${groupedQuestion.get(questionGroup).get(0).getAddition()==null || groupedQuestion.get(questionGroup).get(0).getAddition().isEmpty()}"
+               th:text="${groupedQuestion.get(questionGroup).get(0).getAddition()}"></h4>
+            <div class="question B" th:each="question :${groupedQuestion.get(questionGroup)}">
+                <h4 class="questionStr">
+                    <span class="left" th:text="${num.add1()+'.'}"></span>
+                    <span class="left getQuestion" th:text="${question.getQuestion()}"></span>
+                    <span class="right" th:text="${question.getId()}"></span>
+                </h4>
+                <p><span>答案：</span><span th:text="${question.getAnswer()}"></span></p>
+                <p th:unless="${question.getExplain()==null||question.getExplain().isEmpty()}"><span>解析：</span><span th:text="${question.getExplain()}"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

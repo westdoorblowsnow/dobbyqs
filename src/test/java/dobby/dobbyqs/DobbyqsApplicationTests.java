@@ -2,12 +2,13 @@ package dobby.dobbyqs;
 
 import dobby.dobbyqs.mybatis.mapper.ProfessionMapper;
 import dobby.dobbyqs.mybatis.service.ProfessionService;
+import dobby.dobbyqs.mybatis.service.QuestionService;
 import dobby.dobbyqs.web.DobbyUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-//@SpringBootTest
+@SpringBootTest
 class DobbyqsApplicationTests {
 
     @Test
@@ -17,17 +18,22 @@ class DobbyqsApplicationTests {
     }
 
     @Test
-    void testSelectAll(@Autowired ProfessionMapper mapper){
+    void testSelectAll(@Autowired ProfessionMapper mapper) {
         System.out.println(mapper.selectAll());
     }
 
     @Test
-    void testGetProfession(@Autowired ProfessionService service){
+    void testGetProfession(@Autowired ProfessionService service) {
         System.out.println(service.selectGetAll());
     }
 
     @Test
-    void testUtil(){
+    void testGetQuestion(@Autowired QuestionService questionService) {
+        System.out.println(questionService.selectAllGetByPage(1,10000));
+    }
+
+    @Test
+    void testUtil() {
         System.out.println(Integer.toBinaryString(DobbyUtils.intAnswer("ABCDFOGG")));
         System.out.println(DobbyUtils.stringAnswer(DobbyUtils.intAnswer("ABCDFOGF")));
         System.out.println(DobbyUtils.listOptions("我爱你##一万年##爱你##禁得起##考验"));

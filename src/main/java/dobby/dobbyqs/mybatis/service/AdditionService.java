@@ -1,7 +1,8 @@
 package dobby.dobbyqs.mybatis.service;
 
 import dobby.dobbyqs.mybatis.pojo.Addition;
-public interface AdditionService{
+
+public interface AdditionService {
 
     int deleteByPrimaryKey(Integer id);
 

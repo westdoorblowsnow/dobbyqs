@@ -1,4 +1,5 @@
 package dobby.dobbyqs.mybatis.mapper;
+
 import org.apache.ibatis.annotations.Param;
 
 import dobby.dobbyqs.mybatis.pojo.Profession;
@@ -7,10 +8,11 @@ import java.util.List;
 
 public interface ProfessionMapper {
 
-    List<Profession>  selectAll();
+    List<Profession> selectAll();
 
     /**
      * delete by primary key
+     *
      * @param id primaryKey
      * @return deleteCount
      */
@@ -18,6 +20,7 @@ public interface ProfessionMapper {
 
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -25,6 +28,7 @@ public interface ProfessionMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
@@ -32,6 +36,7 @@ public interface ProfessionMapper {
 
     /**
      * select by primary key
+     *
      * @param id primary key
      * @return object by primary key
      */
@@ -39,6 +44,7 @@ public interface ProfessionMapper {
 
     /**
      * update record selective
+     *
      * @param record the updated record
      * @return update count
      */
@@ -46,6 +52,7 @@ public interface ProfessionMapper {
 
     /**
      * update record
+     *
      * @param record the updated record
      * @return update count
      */

@@ -19,7 +19,7 @@ public class QuestionMapperTest {
 
     @Test
     public void testSelectAll() throws FileNotFoundException {
-        System.out.println(mapper.selectAll());
+        System.out.println(mapper.selectAll(0,100000));
 
     }
 }

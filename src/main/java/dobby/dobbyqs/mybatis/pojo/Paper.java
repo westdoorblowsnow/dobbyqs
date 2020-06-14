@@ -72,9 +72,9 @@ public class Paper implements Serializable {
         }
         Paper other = (Paper) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getSubjectId() == null ? other.getSubjectId() == null : this.getSubjectId().equals(other.getSubjectId()))
-            && (this.getTag() == null ? other.getTag() == null : this.getTag().equals(other.getTag()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getSubjectId() == null ? other.getSubjectId() == null : this.getSubjectId().equals(other.getSubjectId()))
+                && (this.getTag() == null ? other.getTag() == null : this.getTag().equals(other.getTag()));
     }
 
     @Override

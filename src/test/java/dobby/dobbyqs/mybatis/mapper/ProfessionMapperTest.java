@@ -1,5 +1,6 @@
 package dobby.dobbyqs.mybatis.mapper;
 
+import dobby.dobbyqs.mybatis.pojo.Profession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 

@@ -3,7 +3,7 @@ package dobby.dobbyqs.web.bean;
 import java.util.List;
 
 public class GetQuestion {
-    int id;
+    Integer id;
     String type;
     String question;
     String addition;
@@ -11,8 +11,29 @@ public class GetQuestion {
     String answer;
     String explain;
     String tag;
+    String group;
 
-    public GetQuestion(int id, String type, String question, String addition, List<String> options, String answer, String explain, String tag) {
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public GetQuestion(Integer id, String type, String question, String addition, List<String> options, String answer, String explain, String tag, String group) {
+        this.id = id;
+        this.type = type;
+        this.question = question;
+        this.addition = addition;
+        this.options = options;
+        this.answer = answer;
+        this.explain = explain;
+        this.tag = tag;
+        this.group = group;
+    }
+
+    public GetQuestion(Integer id, String type, String question, String addition, List<String> options, String answer, String explain, String tag) {
         this.id = id;
         this.type = type;
         this.question = question;
@@ -23,11 +44,11 @@ public class GetQuestion {
         this.tag = tag;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -88,5 +109,20 @@ public class GetQuestion {
     }
 
     public GetQuestion() {
+    }
+
+    @Override
+    public String toString() {
+        return "GetQuestion{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", question='" + question + '\'' +
+                ", addition='" + addition + '\'' +
+                ", options=" + options +
+                ", answer='" + answer + '\'' +
+                ", explain='" + explain + '\'' +
+                ", tag='" + tag + '\'' +
+                ", group='" + group + '\'' +
+                '}';
     }
 }

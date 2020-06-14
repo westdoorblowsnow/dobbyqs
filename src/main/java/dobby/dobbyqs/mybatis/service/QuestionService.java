@@ -1,12 +1,11 @@
 package dobby.dobbyqs.mybatis.service;
 
 import dobby.dobbyqs.mybatis.pojo.Question;
-import dobby.dobbyqs.web.bean.GetProfesstion;
 import dobby.dobbyqs.web.bean.GetQuestion;
 
 import java.util.List;
 
-public interface QuestionService{
+public interface QuestionService {
 
 
     int deleteByPrimaryKey(Integer id);
@@ -21,6 +20,8 @@ public interface QuestionService{
 
     int updateByPrimaryKey(Question record);
 
-    GetQuestion selectAllGet();
+    List<GetQuestion> selectAllGetByPage(Integer currIndex, Integer pageSize);
+
+    GetQuestion selectFullGetById(int id);
 
 }

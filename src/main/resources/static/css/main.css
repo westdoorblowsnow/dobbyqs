@@ -1,0 +1,17 @@
+.main{
+    width: 800px;
+    margin: 0 auto;
+}
+
+.row{
+    margin: 5px;
+    padding: 5px 20px;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}

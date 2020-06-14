@@ -1,13 +1,17 @@
 package dobby.dobbyqs.mybatis.mapper;
 
 import dobby.dobbyqs.mybatis.pojo.Question;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface QuestionMapper {
 
-    Question selectAll();
+    List<Question> selectAll( @Param("currIndex")Integer currIndex, @Param("pageSize")Integer pageSize);
 
     /**
      * delete by primary key
+     *
      * @param id primaryKey
      * @return deleteCount
      */
@@ -15,6 +19,7 @@ public interface QuestionMapper {
 
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -22,6 +27,7 @@ public interface QuestionMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
@@ -29,6 +35,7 @@ public interface QuestionMapper {
 
     /**
      * select by primary key
+     *
      * @param id primary key
      * @return object by primary key
      */
@@ -36,6 +43,7 @@ public interface QuestionMapper {
 
     /**
      * update record selective
+     *
      * @param record the updated record
      * @return update count
      */
@@ -43,6 +51,7 @@ public interface QuestionMapper {
 
     /**
      * update record
+     *
      * @param record the updated record
      * @return update count
      */

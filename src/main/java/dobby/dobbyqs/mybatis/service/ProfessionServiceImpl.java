@@ -3,19 +3,20 @@ package dobby.dobbyqs.mybatis.service;
 import dobby.dobbyqs.mybatis.mapper.SubjectMapper;
 import dobby.dobbyqs.mybatis.pojo.Subject;
 import dobby.dobbyqs.web.POJOToWebBean;
-import dobby.dobbyqs.web.bean.GetProfesstion;
-import dobby.dobbyqs.web.bean.GetSubject;
+import dobby.dobbyqs.web.bean.GetProfession;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
 import dobby.dobbyqs.mybatis.mapper.ProfessionMapper;
 import dobby.dobbyqs.mybatis.pojo.Profession;
-import dobby.dobbyqs.mybatis.service.ProfessionService;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
-public class ProfessionServiceImpl implements ProfessionService{
+public class ProfessionServiceImpl implements ProfessionService {
 
     @Resource
     private ProfessionMapper professionMapper;
@@ -35,7 +36,9 @@ public class ProfessionServiceImpl implements ProfessionService{
 
     @Override
     public int insertSelective(Profession record) {
-        return professionMapper.insertSelective(record);
+        final int i = professionMapper.insertSelective(record);
+        System.out.println(record);
+        return i;
     }
 
     @Override
@@ -54,16 +57,22 @@ public class ProfessionServiceImpl implements ProfessionService{
     }
 
     @Override
-    public List<GetProfesstion> selectGetAll() {
+    public List<GetProfession> selectGetAll() {
         List<Profession> professions = professionMapper.selectAll();
-        if (!professions.isEmpty()){
-            List<GetProfesstion> getProfesstions = new ArrayList<>();
-            for (Profession profession:
-                 professions) {
+        if (!professions.isEmpty()) {
+            List<GetProfession> getProfesstions = new ArrayList<>();
+            for (Profession profession :
+                    professions) {
                 List<Subject> subjects = subjectMapper.selectByProfessionId(profession.getId());
-                GetProfesstion getProfesstion = POJOToWebBean.toGetProfession(profession,subjects);
+                GetProfession getProfesstion = POJOToWebBean.toGetProfession(profession, subjects);
                 getProfesstions.add(getProfesstion);
             }
+            getProfesstions.sort(new Comparator<GetProfession>() {
+                @Override
+                public int compare(GetProfession o1, GetProfession o2) {
+                    return o1.getCode().compareTo(o2.getCode());
+                }
+            });
             return getProfesstions;
         }
         return null;

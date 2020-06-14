@@ -1,11 +1,11 @@
 package dobby.dobbyqs.mybatis.service;
 
 import dobby.dobbyqs.mybatis.pojo.Profession;
-import dobby.dobbyqs.web.bean.GetProfesstion;
+import dobby.dobbyqs.web.bean.GetProfession;
 
 import java.util.List;
 
-public interface ProfessionService{
+public interface ProfessionService {
 
     int deleteByPrimaryKey(Integer id);
 
@@ -19,6 +19,6 @@ public interface ProfessionService{
 
     int updateByPrimaryKey(Profession record);
 
-    List<GetProfesstion> selectGetAll();
+    List<GetProfession> selectGetAll();
 
 }

@@ -1,7 +1,8 @@
 package dobby.dobbyqs.mybatis.service;
 
 import dobby.dobbyqs.mybatis.pojo.Options;
-public interface OptionsService{
+
+public interface OptionsService {
 
 
     int deleteByPrimaryKey(Integer id);

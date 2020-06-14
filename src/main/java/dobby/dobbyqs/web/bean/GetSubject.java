@@ -1,13 +1,13 @@
 package dobby.dobbyqs.web.bean;
 
 public class GetSubject {
-    int id;
+    Integer id;
     String name;
 
     public GetSubject() {
     }
 
-    public GetSubject(int id, String name) {
+    public GetSubject(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -16,7 +16,7 @@ public class GetSubject {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -26,5 +26,13 @@ public class GetSubject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "GetSubject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

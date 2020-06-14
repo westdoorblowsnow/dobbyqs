@@ -11,6 +11,15 @@ public class Subject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public Subject(Integer id, Integer professionId, String name) {
+        this.id = id;
+        this.professionId = professionId;
+        this.name = name;
+    }
+
+    public Subject() {
+    }
+
     public Integer getId() {
         return id;
     }
@@ -61,8 +70,8 @@ public class Subject implements Serializable {
         }
         Subject other = (Subject) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getProfessionId() == null ? other.getProfessionId() == null : this.getProfessionId().equals(other.getProfessionId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()));
+                && (this.getProfessionId() == null ? other.getProfessionId() == null : this.getProfessionId().equals(other.getProfessionId()))
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()));
     }
 
     @Override

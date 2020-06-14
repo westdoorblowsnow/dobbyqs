@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>diagram_show</title>
+</head>
+<style>
+    .main{
+        width: 800px;
+        margin: 0 auto;
+    }
+</style>
+<body>
+    <div class="main">
+        <img th:src="${'data:image/'+diagram.getType()+';base64,'+diagram.getDiagram()}" src="favicon.ico">
+    </div>
+</body>
+</html>

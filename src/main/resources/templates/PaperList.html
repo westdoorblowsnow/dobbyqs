@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PaperList</title>
+    <style>
+        .main{
+            width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .list{
+            border: 2px dotted black;
+        }
+        .profession{
+            display: inline-block;
+            width: 200px;
+        }
+        .subject{
+            display: inline-block;
+            width: 120px;
+        }
+        .paper{
+            display: inline-block;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="head">
+            <h1>所有试卷列表</h1>
+        </div>
+        <div class="list">
+            <ol type="1">
+                <li th:each="paper :${papers}">
+                    <span class="profession" th:text="${paper.get('professionName')}"></span>
+                    <span class="subject" th:text="${paper.get('subjectName')}"></span>
+                    <a class="paper" target="_blank" th:text="${paper.get('paperName')}" th:href="${'/paper?id='+paper.get('paperId')}" href="/paper"></a>
+                </li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

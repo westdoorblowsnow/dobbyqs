@@ -1,12 +1,15 @@
 package dobby.dobbyqs.mybatis.service;
 
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
 import dobby.dobbyqs.mybatis.mapper.OptionsMapper;
 import dobby.dobbyqs.mybatis.pojo.Options;
 import dobby.dobbyqs.mybatis.service.OptionsService;
+
 @Service
-public class OptionsServiceImpl implements OptionsService{
+public class OptionsServiceImpl implements OptionsService {
 
     @Resource
     private OptionsMapper optionsMapper;
@@ -23,7 +26,14 @@ public class OptionsServiceImpl implements OptionsService{
 
     @Override
     public int insertSelective(Options record) {
-        return optionsMapper.insertSelective(record);
+        int k = 0;
+        try {
+            k = optionsMapper.insertSelective(record);
+        } catch (Exception e) {
+            System.out.println(record);
+            throw e;
+        }
+        return k;
     }
 
     @Override

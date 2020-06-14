@@ -3,15 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <title>show questions</title>
-    <link href="element-ui/element-ui_index.css">
-    <script src="element-ui/elememt-ui-index.js"></script>
     <script src="vue/vue.js"></script>
+    <script src="element-ui/element-ui-index.js"></script>
+    <script src="/vue/jquery-3.5.1.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 </head>
 <body>
-<el-container>
-    <el-header>Header</el-header>
-    <el-main>Main</el-main>
-    <el-footer>Footer</el-footer>
-</el-container>
+<div id="app">
+    <el-row :gutter="10">
+        <el-col :span="6">
+            <div class="grid-content bg-purple">
+                <el-input type="textarea" :rows="40" placeholder="请输入试题"
+                          v-model="textareaQ">
+                </el-input>
+            </div>
+        </el-col>
+        <el-col :span="3">
+            <div class="grid-content bg-purple">
+                <el-input type="textarea" :rows="40" placeholder="请输入答案"
+                          v-model="textareaA">
+            </div>
+        </el-col>
+        <el-col :span="15">
+            <div class="grid-content bg-purple">
+                <template>
+                    <el-table :data="post_paper.questions"
+                              border
+                              height="850"
+                              style="width: 100%">
+                        <!--
+                        <el-table-column type="expand">
+                            <template slot-scope="props">
+                                <el-form label-position="left" inline class="demo-table-expand">
+                                    <el-form-item label="补充内容">
+                                        <span>{{ props.row.addition }}</span>
+                                    </el-form-item>
+                                    <el-form-item label="A">
+                                        <span>{{ props.row.a }}</span>
+                                    </el-form-item>
+                                    <el-form-item label="B">
+                                        <span>{{ props.row.b }}</span>
+                                    </el-form-item>
+                                    <el-form-item label="C">
+                                        <span>{{ props.row.c }}</span>
+                                    </el-form-item>
+                                    <el-form-item label="D">
+                                        <span>{{ props.row.d }}</span>
+                                    </el-form-item>
+                                    <el-form-item label="E">
+                                        <span>{{ props.row.e }}</span>
+                                    </el-form-item>
+
+                                    <el-form-item label="解析">
+                                        <span>{{ props.row.explain }}</span>
+                                    </el-form-item>
+                                </el-form>
+                            </template>
+                        </el-table-column>
+
+                        -->
+                        <el-table-column  prop="num" label="题号" >
+                        </el-table-column>
+                        <el-table-column  prop="group" label="组" >
+                        </el-table-column>
+                        <el-table-column  prop="score" label="分值" >
+                        </el-table-column>
+                        <el-table-column  prop="answer" label="答案" >
+                        </el-table-column>
+                        <el-table-column prop="question" label="题目" >
+                        </el-table-column>
+                        <el-table-column prop="addition" label="补充" >
+                        </el-table-column>
+                        <el-table-column prop="explain" label="解释" >
+                        </el-table-column>
+                        <el-table-column prop="options[0]" label="A" >
+                        </el-table-column>
+                        <el-table-column prop="options[1]" label="B" >
+                        </el-table-column>
+                        <el-table-column prop="options[2]" label="C" >
+                        </el-table-column>
+                        <el-table-column prop="options[3]" label="D" >
+                        </el-table-column>
+                        <el-table-column prop="options[4]" label="E" >
+                        </el-table-column>
+                    </el-table>
+                </template>
+            </div>
+        </el-col>
+    </el-row>
+    <el-row :gutter="10">
+        <el-col :span="2">
+            <div class="grid-content bg-purple">
+                <el-button v-on:click="postPA" style="width: 100%">转换试题</el-button>
+            </div>
+        </el-col>
+        <el-col :span="4">
+        <div class="grid-content bg-purple">
+            <el-select v-model="professionIndex"placeholder="请选择专业" style="width: 100%">
+                <el-option
+                        v-for="(item,iii) in professions"
+                        :label="item.name"
+                        :value="iii">
+                </el-option>
+            </el-select>
+        </div>
+    </el-col>
+        <el-col :span="4">
+            <div class="grid-content bg-purple">
+                <el-select v-model="subjectId" placeholder="请选择科目" style="width: 100%">
+                    <el-option
+                            v-for="item in subjects"
+                            :label="item.name"
+                            :value="item.id">
+                    </el-option>
+                </el-select>
+            </div>
+        </el-col>
+        <el-col :span=6>
+            <div class="grid-content bg-purple">
+                <el-input v-model="name" placeholder="试卷标题"></el-input>
+            </div>
+        </el-col>
+        <el-col :span="6">
+            <div class="grid-content bg-purple">
+                <el-input v-model="tag" placeholder="tag"></el-input>
+            </div>
+        </el-col>
+        <el-col :span="2">
+            <div class="grid-content bg-purple">
+                <el-button v-on:click="postUP" style="width: 100%">上传到数据库</el-button>
+            </div>
+        </el-col>
+    </el-row>
+</div>
+
 </body>
+<link href="css/show_questions.css" rel="stylesheet" type="text/css">
+<script src="js/show_question.js"></script>
 </html>

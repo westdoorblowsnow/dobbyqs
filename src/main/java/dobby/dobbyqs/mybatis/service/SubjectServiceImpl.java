@@ -1,12 +1,15 @@
 package dobby.dobbyqs.mybatis.service;
 
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
 import dobby.dobbyqs.mybatis.pojo.Subject;
 import dobby.dobbyqs.mybatis.mapper.SubjectMapper;
 import dobby.dobbyqs.mybatis.service.SubjectService;
+
 @Service
-public class SubjectServiceImpl implements SubjectService{
+public class SubjectServiceImpl implements SubjectService {
 
     @Resource
     private SubjectMapper subjectMapper;

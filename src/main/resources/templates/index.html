@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<div>
+    <div class="main" style="width: 800px;margin: 0px auto " th:each="profession : ${professions}">
+        <p style="padding:10px;border-bottom:3px solid #b3d8ff"><span th:text="${profession.getName()}"></span><span>&emsp;&emsp;&emsp;&emsp;</span><span
+                style="float: right"
+                th:text="${profession.getId()}"></span><span style="float: right">&emsp;&emsp;&emsp;&emsp;</span><span
+                style="float: right"
+                th:text="${profession.getCode()}"></span></p>
+        <div th:each="subject : ${profession.getSubjects()}">
+            <p style="margin-left: 50px"><span
+                    th:text="${subject.getName()}"></span><span>&emsp;&emsp;&emsp;&emsp;</span><span
+                    style="float: right"
+                    th:text="${subject.getId()}"></span></p>
+        </div>
+        <br>
+    </div>
+</div>
+</body>
+</html>

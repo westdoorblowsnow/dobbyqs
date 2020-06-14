@@ -1,19 +1,24 @@
 package dobby.dobbyqs.mybatis.service;
 
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
 import dobby.dobbyqs.mybatis.pojo.PaperQuestionLink;
 import dobby.dobbyqs.mybatis.mapper.PaperQuestionLinkMapper;
 import dobby.dobbyqs.mybatis.service.PaperQuestionLinkService;
+
+import java.util.List;
+
 @Service
-public class PaperQuestionLinkServiceImpl implements PaperQuestionLinkService{
+public class PaperQuestionLinkServiceImpl implements PaperQuestionLinkService {
 
     @Resource
     private PaperQuestionLinkMapper paperQuestionLinkMapper;
 
     @Override
-    public int deleteByPrimaryKey(Integer paperId,Integer questionId) {
-        return paperQuestionLinkMapper.deleteByPrimaryKey(paperId,questionId);
+    public int deleteByPrimaryKey(Integer paperId, Integer questionId) {
+        return paperQuestionLinkMapper.deleteByPrimaryKey(paperId, questionId);
     }
 
     @Override
@@ -27,8 +32,8 @@ public class PaperQuestionLinkServiceImpl implements PaperQuestionLinkService{
     }
 
     @Override
-    public PaperQuestionLink selectByPrimaryKey(Integer paperId,Integer questionId) {
-        return paperQuestionLinkMapper.selectByPrimaryKey(paperId,questionId);
+    public PaperQuestionLink selectByPrimaryKey(Integer paperId, Integer questionId) {
+        return paperQuestionLinkMapper.selectByPrimaryKey(paperId, questionId);
     }
 
     @Override
@@ -39,6 +44,11 @@ public class PaperQuestionLinkServiceImpl implements PaperQuestionLinkService{
     @Override
     public int updateByPrimaryKey(PaperQuestionLink record) {
         return paperQuestionLinkMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<Integer> getQuestionsIdsByPaperId(Integer paperId) {
+        return paperQuestionLinkMapper.selectQuestionIdsByPaperId(paperId);
     }
 
 }

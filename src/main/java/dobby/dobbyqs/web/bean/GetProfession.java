@@ -4,23 +4,23 @@ import dobby.dobbyqs.mybatis.pojo.Subject;
 
 import java.util.List;
 
-public class GetProfesstion {
-    int id;
+public class GetProfession {
+    Integer id;
     String code;
     String name;
     List<GetSubject> subjects;
 
-    public GetProfesstion() {
+    public GetProfession() {
     }
 
-    public GetProfesstion(int id, String code, String name, List<GetSubject> subjects) {
+    public GetProfession(Integer id, String code, String name, List<GetSubject> subjects) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.subjects = subjects;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -36,7 +36,7 @@ public class GetProfesstion {
         this.subjects = subjects;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

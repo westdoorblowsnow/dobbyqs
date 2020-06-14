@@ -61,8 +61,8 @@ public class PaperQuestionLink implements Serializable {
         }
         PaperQuestionLink other = (PaperQuestionLink) that;
         return (this.getPaperId() == null ? other.getPaperId() == null : this.getPaperId().equals(other.getPaperId()))
-            && (this.getQuestionId() == null ? other.getQuestionId() == null : this.getQuestionId().equals(other.getQuestionId()))
-            && (this.getScore() == null ? other.getScore() == null : this.getScore().equals(other.getScore()));
+                && (this.getQuestionId() == null ? other.getQuestionId() == null : this.getQuestionId().equals(other.getQuestionId()))
+                && (this.getScore() == null ? other.getScore() == null : this.getScore().equals(other.getScore()));
     }
 
     @Override

@@ -1,7 +1,8 @@
 package dobby.dobbyqs.mybatis.service;
 
 import dobby.dobbyqs.mybatis.pojo.Subject;
-public interface SubjectService{
+
+public interface SubjectService {
 
 
     int deleteByPrimaryKey(Integer id);

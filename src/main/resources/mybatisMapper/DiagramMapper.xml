@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dobby.dobbyqs.mybatis.mapper.DiagramMapper">
+  <resultMap id="BaseResultMap" type="dobby.dobbyqs.mybatis.pojo.Diagram">
+    <id column="question_id" jdbcType="INTEGER" property="questionId" />
+    <id column="num" jdbcType="INTEGER" property="num" />
+    <result column="diagram" jdbcType="VARCHAR" property="diagram" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    question_id, num, diagram, `type`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="dobby.dobbyqs.mybatis.pojo.DiagramKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dobbyqs.diagram
+    where question_id = #{questionId,jdbcType=INTEGER}
+      and num = #{num,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="dobby.dobbyqs.mybatis.pojo.DiagramKey">
+    delete from dobbyqs.diagram
+    where question_id = #{questionId,jdbcType=INTEGER}
+      and num = #{num,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="dobby.dobbyqs.mybatis.pojo.Diagram">
+    insert into dobbyqs.diagram (question_id, num, diagram,
+      `type`)
+    values (#{questionId,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{diagram,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="dobby.dobbyqs.mybatis.pojo.Diagram">
+    insert into dobbyqs.diagram
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="diagram != null">
+        diagram,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="diagram != null">
+        #{diagram,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="dobby.dobbyqs.mybatis.pojo.Diagram">
+    update dobbyqs.diagram
+    <set>
+      <if test="diagram != null">
+        diagram = #{diagram,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where question_id = #{questionId,jdbcType=INTEGER}
+      and num = #{num,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="dobby.dobbyqs.mybatis.pojo.Diagram">
+    update dobbyqs.diagram
+    set diagram = #{diagram,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR}
+    where question_id = #{questionId,jdbcType=INTEGER}
+      and num = #{num,jdbcType=INTEGER}
+  </update>
+</mapper>
