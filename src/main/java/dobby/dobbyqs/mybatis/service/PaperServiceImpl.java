@@ -138,7 +138,12 @@ public class PaperServiceImpl implements PaperService {
                     optionsId = options.getId();
                 }
             }
-            question = WebBeanToPOJO.toQuestion(postQuestion, additionId, optionsId);
+            try {
+                question = WebBeanToPOJO.toQuestion(postQuestion, additionId, optionsId);
+            }catch (NullPointerException e){
+                System.out.println(postQuestion);
+                throw e;
+            }
             question.setSubjectId(postPaper.getSubjectId());
             final int insertQuestion = questionService.insertSelective(question);
             if (insertQuestion != 1) throw new RuntimeException("question table insert exception");

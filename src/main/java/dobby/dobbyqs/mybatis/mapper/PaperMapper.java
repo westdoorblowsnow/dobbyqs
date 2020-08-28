@@ -2,6 +2,8 @@ package dobby.dobbyqs.mybatis.mapper;
 
 import dobby.dobbyqs.mybatis.pojo.Paper;
 
+import java.util.List;
+
 public interface PaperMapper {
     /**
      * delete by primary key
@@ -56,4 +58,10 @@ public interface PaperMapper {
      * @return update count
      */
     int updateByPrimaryKey(Paper record);
+
+    Paper getPaperByIndex(Integer index);
+
+    List<Paper> selectPapersBySubjectId(Integer subjectId);
+
+    List<Paper> selectAllPapers();
 }

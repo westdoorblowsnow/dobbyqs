@@ -1,25 +1,26 @@
 package dobby.dobbyqs.test;
 
-import com.sun.imageio.plugins.common.ImageUtil;
-import dobby.dobbyqs.paper_parse.PaperParser;
+import dobby.dobbyqs.mybatis.mapper.QuestionMapper;
+import dobby.dobbyqs.mybatis.pojo.Question;
+import dobby.dobbyqs.mybatis.service.QuestionService;
+import dobby.dobbyqs.paper.PaperParser;
 import dobby.dobbyqs.web.DobbyUtils;
 import dobby.dobbyqs.web.StringUtils;
+import dobby.dobbyqs.web.bean.GetQuestion;
 import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.resizers.configurations.Rendering;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Test {
-    public void test(int k) {
-        final int i = k;
-        System.out.println(k);
-    }
+
 
     @org.junit.Test
     public void testLoop() {
@@ -77,7 +78,7 @@ public class Test {
         String d = "C:\\Users\\pc\\Desktop\\fad.jpg";
         final BufferedImage bufferedImage = Thumbnails.of(d).scale(1.0f).asBufferedImage();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ImageIO.write(bufferedImage,"jpg",byteArrayOutputStream);
+        ImageIO.write(bufferedImage, "jpg", byteArrayOutputStream);
         final String string = DobbyUtils.bytesToBase64String(byteArrayOutputStream.toByteArray());
         System.out.println(string);
     }
@@ -115,12 +116,37 @@ public class Test {
     }
 
     @org.junit.Test
-    public void kkkkkkkk(){
-       String s = "fadksjfhkasdjhfklasjd${img:0}";
+    public void kkkkkkkk() {
+        String s = "fadksjfhkasdjhfklasjd${img:0}";
         final Pattern compile = Pattern.compile("\\$\\{img:\\d+\\}");
         final Matcher matcher = compile.matcher(s);
         matcher.find();
         System.out.println(matcher.group());
+    }
+
+    @org.junit.Test
+    public void file() throws IOException {
+        String t0 = "临床医学检验技术(师) 模拟试卷";
+        String[] t1 = {"一", "二", "三", "四", "五", "六", "七"};
+        String[] t2 = {"基础知识", "相关专业知识", "专业知识", "专业实践能力"};
+        String t3 = "——答案";
+        String t4 = ".txt";
+        String root = "C:\\Users\\pc\\Desktop\\临床医学检验技术(师)";
+        for (String tt1 : t1) {
+            for (String tt2 : t2) {
+                File file = new File(root + "\\" + t0 + " " + tt1 + " " + tt2 + t4);
+                File file2 = new File(root + "\\" + t0 + " " + tt1 + " " + tt2 + t3 + t4);
+                if (!file.exists()) {
+                    file.createNewFile();
+                    System.out.println(file.getAbsolutePath());
+                }
+                if (!file2.exists()) {
+                    file2.createNewFile();
+                    System.out.println(file2.getAbsolutePath());
+                }
+//                if (file2.exists()) file2.deleteOnExit();
+            }
+        }
     }
 
 }

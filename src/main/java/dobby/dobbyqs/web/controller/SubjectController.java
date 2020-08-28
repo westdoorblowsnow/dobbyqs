@@ -29,7 +29,7 @@ public class SubjectController {
         if (StringUtils.isBlank(postSubject.getName())) return HttpMessage.invalidArgument("name="+postSubject.getName());
         final Subject subject = WebBeanToPOJO.toSubject(postSubject);
         final int insertSubject = subjectService.insertSelective(subject);
-        if (insertSubject == 1) return HttpMessage.insertOk();
+        if (insertSubject == 1) return HttpMessage.insertOk(subject);
         else return HttpMessage.executeException("插入失败").setData(subject);
     }
 

@@ -3,7 +3,9 @@ package dobby.dobbyqs.mybatis.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.StringJoiner;
 
 /**
  * diagram
@@ -78,14 +80,10 @@ public class Diagram extends DiagramKey implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", diagram=").append(diagram);
-        sb.append(", type=").append(type);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return new StringJoiner(", ", Diagram.class.getSimpleName() + "[", "]")
+                .add("diagram='" + diagram + "'")
+                .add("image=" + Arrays.toString(image))
+                .add("type='" + type + "'")
+                .toString();
     }
 }

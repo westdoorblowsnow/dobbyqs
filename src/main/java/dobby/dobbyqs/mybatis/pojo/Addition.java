@@ -1,6 +1,7 @@
 package dobby.dobbyqs.mybatis.pojo;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 public class Addition implements Serializable {
     private Integer id;
@@ -27,14 +28,10 @@ public class Addition implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", addition=").append(addition);
-        sb.append("]");
-        return sb.toString();
+        return new StringJoiner(", ", Addition.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("addition='" + addition + "'")
+                .toString();
     }
 
     @Override

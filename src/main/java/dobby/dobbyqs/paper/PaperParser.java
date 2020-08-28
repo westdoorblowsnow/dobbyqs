@@ -1,4 +1,4 @@
-package dobby.dobbyqs.paper_parse;
+package dobby.dobbyqs.paper;
 
 import dobby.dobbyqs.web.StringUtils;
 import dobby.dobbyqs.web.bean.PostPaper;
@@ -117,7 +117,9 @@ public class PaperParser implements PaperParse {
                 options.add(str.substring(e + 2, numPaperPositionList.get(start - 1).getI1()));
             } catch (IndexOutOfBoundsException ee) {
 //                ee.printStackTrace();
-                throw new PaperParserException("缺少题号：" + (numPaperPositionList.size() + 1) + "或组识别缺失：" + start + "附近");
+
+
+                throw new PaperParserException("缺少题号：" + (numPaperPositionList.size() + 1) + "  或组识别缺失：" + start + "附近");
             }
             String addition = null;
             final String s = options.get(4);
@@ -284,7 +286,7 @@ public class PaperParser implements PaperParse {
 
 
     @Override
-    public PostPaper parser(String paper, String answer) {
+    public PostPaper parse(String paper, String answer) {
 //        System.out.println(answer);
         checkNumPosition(paper, numPaperPositionList);
         checkNumPosition(answer, numAnswerPositionList);

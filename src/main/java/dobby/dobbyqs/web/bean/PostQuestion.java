@@ -32,6 +32,21 @@ public class PostQuestion {
                 '}';
     }
 
+    public String toStrLine() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("----------------------------------------------------------").append('\n')
+                .append(addition).append("\n")
+                .append(num).append('.').append(question).append('\n')
+                .append(options.get(0)).append('\n')
+                .append(options.get(1)).append('\n')
+                .append(options.get(2)).append('\n')
+                .append(options.get(3)).append('\n')
+                .append(options.get(4)).append('\n')
+                .append('<').append(answer).append('>').append(explain).append('\n')
+                .append("----------------------------------------------------------");
+        return builder.toString();
+    }
+
     public Integer getScoe() {
         return scoe;
     }

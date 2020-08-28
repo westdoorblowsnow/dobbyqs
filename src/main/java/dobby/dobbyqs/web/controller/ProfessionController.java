@@ -2,6 +2,7 @@ package dobby.dobbyqs.web.controller;
 
 import dobby.dobbyqs.mybatis.pojo.Profession;
 import dobby.dobbyqs.mybatis.service.ProfessionService;
+import dobby.dobbyqs.web.DobbyUtils;
 import dobby.dobbyqs.web.StringUtils;
 import dobby.dobbyqs.web.WebBeanToPOJO;
 import dobby.dobbyqs.web.bean.GetProfession;
@@ -35,12 +36,14 @@ public class ProfessionController {
     @PostMapping(path = "/post/profession/insert", consumes = "application/json", produces = "application/json")
     public HttpMessage insertPostProfession(@RequestBody PostProfession postProfession) {
         if (postProfession == null) return HttpMessage.invalidArgument();
-        if (StringUtils.isBlank(postProfession.getCode()))
-            return HttpMessage.invalidArgument("code:" + postProfession.getCode());
+//        if (StringUtils.isBlank(postProfession.getCode()))
+//            return HttpMessage.invalidArgument("code:" + postProfession.getCode());
+        String code = StringUtils.trimToNul(postProfession.getCode());
+        postProfession.setCode(code);
         if (StringUtils.isBlank(postProfession.getName()))
             return HttpMessage.invalidArgument("name:" + postProfession.getName());
         final Profession profession = WebBeanToPOJO.toProfession(postProfession);
-        final int insertProfession = professionService.insertSelective(WebBeanToPOJO.toProfession(postProfession));
+        final int insertProfession = professionService.insertSelective(profession);
         if (insertProfession == 1) return HttpMessage.insertOk(profession);
         else return HttpMessage.executeException("插入失败，数据已存在");
     }

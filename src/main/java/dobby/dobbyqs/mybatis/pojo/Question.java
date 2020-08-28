@@ -1,6 +1,7 @@
 package dobby.dobbyqs.mybatis.pojo;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 public class Question implements Serializable {
     private Integer id;
@@ -81,21 +82,17 @@ public class Question implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", type=").append(type);
-        sb.append(", question=").append(question);
-        sb.append(", answer=").append(answer);
-        sb.append(", explain=").append(explain);
-        sb.append(", tag=").append(tag);
-        sb.append(", subjectId=").append(subjectId);
-        sb.append(", additionId=").append(additionId);
-        sb.append(", optionsId=").append(optionsId);
-        sb.append("]");
-        return sb.toString();
+        return new StringJoiner(", ", Question.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("type='" + type + "'")
+                .add("question='" + question + "'")
+                .add("answer=" + answer)
+                .add("explain='" + explain + "'")
+                .add("tag='" + tag + "'")
+                .add("subjectId=" + subjectId)
+                .add("additionId=" + additionId)
+                .add("optionsId=" + optionsId)
+                .toString();
     }
 
     @Override

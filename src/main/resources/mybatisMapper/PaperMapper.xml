@@ -22,7 +22,28 @@
     </select>
 
     <select id="selectLatest" resultMap="BaseResultMap">
-        SELECT <include refid="Base_Column_List"/> from dobbyqs.paper where id = (SELECT max(id) FROM dobbyqs.paper);
+        SELECT
+        <include refid="Base_Column_List"/>
+        from dobbyqs.paper where id = (SELECT max(id) FROM dobbyqs.paper);
+    </select>
+    <select id="getPaperByIndex" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from dobbyqs.paper
+        order by id desc limit #{index,jdbcType=INTEGER},1;
+    </select>
+
+    <select id="selectPapersBySubjectId" resultMap="BaseResultMap"  resultType="arraylist">
+        select
+        <include refid="Base_Column_List"></include>
+        from dobbyqs.paper
+        where subject_id = #{subjectId,jdbcType=INTEGER}
+    </select>
+    <select id="selectAllPapers" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from dobbyqs.paper
+        where true;
     </select>
 
 

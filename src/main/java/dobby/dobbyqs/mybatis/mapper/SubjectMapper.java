@@ -53,6 +53,6 @@ public interface SubjectMapper {
      */
     int updateByPrimaryKey(Subject record);
 
-    List<Subject> selectByProfessionId(Integer profesionId);
+    List<Subject> selectByProfessionId(Integer professionId);
 
 }

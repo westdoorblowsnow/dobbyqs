@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profession Subject</title>
+    <title>添加专业或试题</title>
     <script src="vue/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <style>
@@ -52,7 +52,6 @@
             code: $("#code").val(),
             name: $("#profession").val()
         }
-        alert(JSON.stringify(data));
         $.ajax({
             //请求方式
             type: "POST",
@@ -65,13 +64,17 @@
             //请求成功
             success: function (result) {
                 console.log(result);
+                alert(JSON.stringify(result));
             },
             //请求失败，包含具体的错误信息
             error: function (e) {
                 console.log(e.status);
                 console.log(e.responseText);
+                alert(JSON.stringify(e));
             }
         });
+        $("#code").val("");
+        $("#profession").val("");
     }
 
     function subjectUp() {
@@ -91,13 +94,16 @@
             //请求成功
             success: function (result) {
                 console.log(result);
+                alert(JSON.stringify(result));
             },
             //请求失败，包含具体的错误信息
             error: function (e) {
                 console.log(e.status);
                 console.log(e.responseText);
+                alert(JSON.stringify(e));
             }
         });
+        $("#subject").val("");
     }
 </script>
 </html>

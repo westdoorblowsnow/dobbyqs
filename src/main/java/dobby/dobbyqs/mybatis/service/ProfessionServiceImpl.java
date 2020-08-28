@@ -14,6 +14,7 @@ import dobby.dobbyqs.mybatis.pojo.Profession;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ProfessionServiceImpl implements ProfessionService {
@@ -70,6 +71,12 @@ public class ProfessionServiceImpl implements ProfessionService {
             getProfesstions.sort(new Comparator<GetProfession>() {
                 @Override
                 public int compare(GetProfession o1, GetProfession o2) {
+                    if (Objects.isNull(o1.getCode())) {
+                        return -1;
+                    }
+                    if (Objects.isNull(o2)) {
+                        return 1;
+                    }
                     return o1.getCode().compareTo(o2.getCode());
                 }
             });

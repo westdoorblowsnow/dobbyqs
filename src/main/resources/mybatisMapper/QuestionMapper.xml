@@ -151,6 +151,19 @@
         select
         <include refid="Base_Column_List">
         </include>
-        from dobbyqs.question where true order by id desc limit #{currIndex,jdbcType=INTEGER} , #{pageSize,jdbcType=INTEGER}
+        from dobbyqs.question order by id desc limit #{currIndex,jdbcType=INTEGER} , #{pageSize,jdbcType=INTEGER}
+    </select>
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(ALL id) from dobbyqs.question;
+    </select>
+    <select id="selectByTopId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"></include>
+        from dobbyqs.question where id &lt;= #{id,jdbcType=INTEGER} order by id desc limit 1;
+    </select>
+    <select id="selectByButtonId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"></include>
+        from dobbyqs.question where id &gt;= #{id,jdbcType=INTEGER} limit 1;
     </select>
 </mapper>

@@ -16,6 +16,9 @@ public class WebBeanToPOJO {
             question.setType(postQuestion.getType());
             question.setQuestion(postQuestion.getQuestion());
             question.setAnswer(DobbyUtils.intAnswer(postQuestion.getAnswer()));
+            if (StringUtils.isBlank(postQuestion.getExplain())){
+                postQuestion.setExplain("略。");
+            }
             question.setExplain(postQuestion.getExplain());
             if (!StringUtils.isBlank(postQuestion.getTag()))
                 question.setTag(StringUtils.trimToNul(postQuestion.getTag()));

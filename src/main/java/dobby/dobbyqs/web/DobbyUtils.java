@@ -3,6 +3,7 @@ package dobby.dobbyqs.web;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,6 +51,16 @@ public class DobbyUtils {
             o.add(split[i]);
         }
         return o;
+    }
+
+
+    public static boolean isAnyNull(Object... objects){
+        for (Object o: objects) {
+            if (Objects.isNull(o)){
+                return true;
+            }
+        }
+        return false;
     }
 
 

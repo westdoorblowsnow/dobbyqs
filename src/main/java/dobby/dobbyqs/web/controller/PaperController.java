@@ -2,11 +2,9 @@ package dobby.dobbyqs.web.controller;
 
 import dobby.dobbyqs.mybatis.pojo.Diagram;
 import dobby.dobbyqs.mybatis.pojo.DiagramKey;
-import dobby.dobbyqs.mybatis.pojo.Question;
 import dobby.dobbyqs.mybatis.service.DiagramService;
 import dobby.dobbyqs.mybatis.service.PaperService;
-import dobby.dobbyqs.paper_parse.PaperParse;
-import dobby.dobbyqs.paper_parse.PaperParser;
+import dobby.dobbyqs.paper.PaperParser;
 import dobby.dobbyqs.web.HttpMessage;
 import dobby.dobbyqs.web.StringUtils;
 import dobby.dobbyqs.web.bean.*;

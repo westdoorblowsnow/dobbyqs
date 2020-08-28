@@ -2,6 +2,8 @@ package dobby.dobbyqs.mybatis.mapper;
 
 import dobby.dobbyqs.mybatis.pojo.Addition;
 
+import java.util.List;
+
 public interface AdditionMapper {
     /**
      * delete by primary key
@@ -34,6 +36,8 @@ public interface AdditionMapper {
      * @return object by primary key
      */
     Addition selectByPrimaryKey(Integer id);
+
+    List<Addition> selectAll();
 
     /**
      * update record selective

@@ -71,9 +71,10 @@
         `name` = #{name,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
     <select id="selectByProfessionId" resultMap="BaseResultMap" resultType="arraylist">
         select
         <include refid="Base_Column_List"></include>
-        from dobbyqs.subject where profession_id=#{professinId,jdbcType=INTEGER}
+        from dobbyqs.subject where profession_id=#{professionId,jdbcType=INTEGER}
     </select>
 </mapper>

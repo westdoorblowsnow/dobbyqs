@@ -23,6 +23,9 @@
     <select id="selectQuestionIdsByPaperId" parameterType="integer" resultType="java.lang.Integer">
         select question_id from dobbyqs.paper_question_link where paper_id = #{paperId,jdbcType=INTEGER}
     </select>
+    <select id="selectPaperIdsByQuestionId" resultType="java.lang.Integer">
+        select paper_id from dobbyqs.paper_question_link where question_id = #{questionId,jdbcType=INTEGER}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="map">
         <!--@mbg.generated-->
         delete from dobbyqs.paper_question_link

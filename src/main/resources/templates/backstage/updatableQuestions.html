@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>试题列表</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .pageIndex {
+            height: 20px;
+        }
+
+        .head {
+            text-align: center;
+            margin: 10px 10px 40px;
+            padding: 10px;
+        }
+
+        .questions {
+            margin: 30px 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="head">
+        <h1>试题浏览</h1>
+    </div>
+    <div th:if="${maxPage>0}">
+        <div class="pageIndex">
+            <a th:if="${pageIndex>1}" th:href="${'/backstage/Questions.html?index='+(pageIndex - 1)+'&size='+pageSize}">
+                <button>上一页</button>
+            </a>
+            <a th:if="${pageIndex<maxPage}"
+               th:href="${'/backstage/Questions.html?index='+(pageIndex + 1)+'&size='+pageSize}"
+               style="float: right"
+            >
+                <button>下一页</button>
+            </a>
+        </div>
+        <div class="questions">
+            <div class="question" th:each="backQuestion : ${backQuestions}">
+                <div>
+                    <span style="display: inline-block" th:each="paperName:${backQuestion.getPaperNames()}" th:text="${'[ '+paperName+' ]'}"></span>
+                </div>
+                <div class="addition" th:if="${backQuestion.getAddition()!=null}">
+                    <p>
+                        <span>补充题干：</span>
+                        <span th:text="${backQuestion.getAddition()}"></span>
+
+                    </p>
+                </div>
+                <div class="questionStr">
+                    <p>
+                        <span>提问：</span>
+                        <a  style="text-decoration: none" target="_blank" th:href="${'/backstage/Question.html?id='+backQuestion.getQuestion().getId()}"><span
+                                th:text="${backQuestion.getQuestion().getQuestion()}"></span></a>
+                    </p>
+                </div>
+                <div class="options">
+                    <ol type="A">
+                        <li class="option" th:each="option:${backQuestion.getOptions()}" th:text="${option}"></li>
+                    </ol>
+                </div>
+                <div class="answer">
+                    <p>
+                        <span>答案：</span><span th:text="${backQuestion.getAnswer()}"></span>
+                    </p>
+                </div>
+                <div class="explain">
+                    <span>解析：</span><span th:text="${backQuestion.getQuestion().getExplain()}"></span>
+                </div>
+                <div style="border-bottom: solid 2px #000000"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

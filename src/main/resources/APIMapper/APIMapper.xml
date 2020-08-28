@@ -19,7 +19,7 @@
         on ad.id = qs.addition_id
         where qs.id = #{id,jdbcType=INTEGER} and op.id = qs.options_id
     </select>
-    <select id="getAnswerAndExplain" resultType="dobby.dobbyqs.web.openAPI.pojo.AnswerAndExplain" resultMap="AnswerAndExplain">
+    <select id="getAnswerAndExplain" parameterType="java.lang.Integer" resultMap="AnswerAndExplain">
         select qs.answer answer,qs.`explain` `explain`
         from dobbyqs.question qs
         where qs.id = #{questionId,jdbcType=INTEGER}

@@ -8,13 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Base64;
 
 @Controller
 public class DiagramController {
@@ -54,6 +52,7 @@ public class DiagramController {
         System.out.println(image.getName());
         System.out.println(image.getContentType());
         System.out.println(image.getOriginalFilename());
+        System.out.println(image.getSize());
         System.out.println("-------------------------------------------");
 //        System.out.println(multipartFile.getBytes());
 

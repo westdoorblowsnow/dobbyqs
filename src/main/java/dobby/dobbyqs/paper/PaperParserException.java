@@ -1,4 +1,4 @@
-package dobby.dobbyqs.paper_parse;
+package dobby.dobbyqs.paper;
 
 public class PaperParserException extends RuntimeException{
     public PaperParserException(String message) {

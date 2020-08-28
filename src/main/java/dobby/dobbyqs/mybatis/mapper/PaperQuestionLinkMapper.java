@@ -55,4 +55,6 @@ public interface PaperQuestionLinkMapper {
     int updateByPrimaryKey(PaperQuestionLink record);
 
     List<Integer> selectQuestionIdsByPaperId(@Param("paperId") Integer paperId);
+
+    List<Integer> selectPaperIdsByQuestionId(@Param("questionId") Integer questionId);
 }

@@ -9,6 +9,8 @@ public interface QuestionMapper {
 
     List<Question> selectAll( @Param("currIndex")Integer currIndex, @Param("pageSize")Integer pageSize);
 
+    Integer getCount();
+
     /**
      * delete by primary key
      *
@@ -56,4 +58,8 @@ public interface QuestionMapper {
      * @return update count
      */
     int updateByPrimaryKey(Question record);
+
+    Question selectByTopId(@Param("id") Integer id);
+
+    Question selectByButtonId(@Param("id") Integer id);
 }

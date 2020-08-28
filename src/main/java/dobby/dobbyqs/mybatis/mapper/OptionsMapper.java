@@ -2,6 +2,8 @@ package dobby.dobbyqs.mybatis.mapper;
 
 import dobby.dobbyqs.mybatis.pojo.Options;
 
+import java.util.List;
+
 public interface OptionsMapper {
     /**
      * delete by primary key
@@ -34,6 +36,8 @@ public interface OptionsMapper {
      * @return object by primary key
      */
     Options selectByPrimaryKey(Integer id);
+
+    List<Options> selectAll();
 
     /**
      * update record selective

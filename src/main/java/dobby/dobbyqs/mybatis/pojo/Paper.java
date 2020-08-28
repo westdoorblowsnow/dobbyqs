@@ -1,6 +1,7 @@
 package dobby.dobbyqs.mybatis.pojo;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 public class Paper implements Serializable {
     private Integer id;
@@ -47,16 +48,12 @@ public class Paper implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", subjectId=").append(subjectId);
-        sb.append(", tag=").append(tag);
-        sb.append("]");
-        return sb.toString();
+        return new StringJoiner(", ", Paper.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("name='" + name + "'")
+                .add("subjectId=" + subjectId)
+                .add("tag='" + tag + "'")
+                .toString();
     }
 
     @Override

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>试题查询</title>
+<!--    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>-->
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <script src="../vue/jquery-3.5.1.js"></script>
+    <script src="../vue/vue.js"></script>
+</head>
+<body>
+<div class="main">
+    <div class="head">
+        <h1>试题查询</h1>
+    </div>
+    <div class="from">
+        <form action="" method="get">
+            <p>
+                <span>题目id：</span>
+                <input id="qusId" type="number" name="id" th:value="${id}">
+                <input id="qusMove" name="move" type="number" value="0" style="display: none">
+            </p>
+            <p>
+                <button type="submit" onclick="$('#qusMove').val(0)">查询</button>
+                <button onclick="$('#qusId').val($('#qusId').val()-1);$('#qusMove').val(-1)" type="submit">上一题</button>
+                <button onclick="$('#qusId').val(Number.parseInt($('#qusId').val())+1);;$('#qusMove').val(1)"
+                        type="submit">下一题
+                </button>
+            </p>
+        </form>
+    </div>
+    <div id="question" th:if="${backQuestion!=null}" ondblclick="startUpdate()">
+        <div>
+            <span style="display: inline-block" th:each="paperName:${backQuestion.getPaperNames()}" th:text="${'[ '+paperName+' ]'}"></span>
+        </div>
+        <div class="addition" th:if="${backQuestion.getAddition()!=null}">
+            <p>
+                <span>补充题干：</span>
+                <span class="doMathjax" th:text="${backQuestion.getAddition()}"></span>
+                <span class="notDoMathjax" style="display: none"
+                      contenteditable="true"
+                      v-html="backQuestion.addition"
+                      @blur="backQuestion.addition=$event.target.innerText">{{backQuestion.addition}}}</span>
+            </p>
+        </div>
+        <div class="questionStr">
+            <p>
+                <span>提问：</span>
+                <span class="doMathjax"
+                      th:text="${backQuestion.getQuestion().getQuestion()}"></span>
+                <span class="notDoMathjax" style="display: none" contenteditable="true"
+                      v-html="backQuestion.question.question"
+                      @blur="backQuestion.question.question=$event.target.innerText">{{backQuestion.question.question}}</span>
+            </p>
+        </div>
+        <div class="options">
+            <ol type="A">
+                <li class="option" th:each="option:${backQuestion.getOptions()}">
+                    <span class="doMathjax" style="width: 100%" th:text="${option}"></span>
+                    <span class="notDoMathjax" style="display: none"
+                          th:text="${'{{backQuestion.options['+optionStat.index+']}}'}" contenteditable="true"
+                          th:attr="v-html=${'backQuestion.options['+optionStat.index+']'},inde=${optionStat.index}"
+                          @blur="kk($event.target)"></span>
+                </li>
+            </ol>
+        </div>
+        <div class="answer">
+            <p>
+                <span>答案：</span>
+                <span class="doMathjax" style="width: 300px"
+                      th:text="${backQuestion.getAnswer()}"></span>
+                <span class="notDoMathjax" style="display: none"
+                      contenteditable="true" v-html="backQuestion.answer"
+                      @blur="backQuestion.answer=$event.target.innerText">{{backQuestion.answer}}</span>
+            </p>
+        </div>
+        <div class="explain">
+            <span>解析：</span>
+            <span class="doMathjax"
+                  th:text="${backQuestion.getQuestion().getExplain()}"></span>
+            <span class="notDoMathjax" style="display: none" contenteditable="true"
+                  v-html="backQuestion.question.explain" @blur="backQuestion.question.explain=$event.target.innerText">{{backQuestion.question.explain}}</span>
+        </div>
+        <div style="border-bottom: solid 2px #000000"></div>
+        <div class="notDoMathjax" style="display: none">
+            <button onclick="up()">上传更改</button>
+        </div>
+    </div>
+</div>
+<script th:if="${backQuestion!=null}">
+    var backQuestion = [(${jsonQuestion})]
+    var vm = new Vue({
+        el: '#question',
+        data: {
+            backQuestion: backQuestion
+        },
+        methods: {
+            kk: function (ta) {
+                vm.backQuestion.options[ta.getAttribute("inde")] = ta.innerText;
+            }
+        }
+    });
+    var b = true;
+
+    function startUpdate() {
+        if (b) {
+            b = false;
+            $(".doMathjax").css("display", "none");
+            $(".notDoMathjax").css("display", "");
+            $.ajax({
+                type: 'get',
+                url: '/backstage/Question',
+                contentType: 'application/json;utf-8',
+                data: {id: [[${id}]]},
+                success: function (data) {
+                    // alert(data)
+                    vm.backQuestion = data;
+                }
+            });
+        }
+    }
+
+    function up() {
+        $.ajax({
+            type: 'post',
+            url: '/backstage/question/update',
+            contentType: 'application/json;utf-8',
+            data: JSON.stringify(vm.backQuestion),
+            success: function (data) {
+                if (data.code == 1) {
+                    alert("修改成功！确认刷新页面！");
+                    location.reload();
+                } else {
+                    alert("修改失败！，确认刷新页面！");
+                    location.reload();
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

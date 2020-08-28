@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>专业列表</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="../vue/jquery-3.5.1.js"></script>
+    <style>
+        .id {
+            width: 3ex;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .displayNone {
+            display: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="head">
+        <h1 class="center">
+            专业列表
+        </h1>
+    </div>
+    <div th:if="${!allBackProfessions.isEmpty()}" class="professions">
+        <ol type="1">
+            <li th:each="backProfession : ${allBackProfessions}">
+                <a target="_blank"
+                   th:href="'/backstage/paperList.html?professionId='+${backProfession.getProfession().getId()}">
+                    [<span class="professionId id" th:text="${backProfession.getProfession().getId()}"></span>]
+                    <span>&lt;<span class="professionCode" th:text="${backProfession.getProfession().getCode()}"></span>&gt;</span>
+                    <span class="professionName name" th:text="${backProfession.getProfession().getName()}"></span>
+                    <span class="subjects right">
+                    [
+                    <span class="subject" th:each="subject : ${backProfession.getSubjects()}">
+                        <span class="subjectId id" th:text="${subject.getId()}"></span>
+                        <span class="subjectName name" th:text="${subject.getName()}"></span>
+                    </span>
+                    ]
+                </span>
+                </a>
+            </li>
+            <div class="displayNone">
+                <div>
+                    <input class="needUp professionName name" value="专业名">
+                    <span class="subjects right">
+                        <input class="needUp subjectName name" id="subject1" value="基础知识">
+                        <input class="needUp subjectName name" id="subject2" value="相关专业知识">
+                        <input class="needUp subjectName name" id="subject3" value="专业知识">
+                        <input class="needUp subjectName name" id="subject4" value="专业实践能力">
+                    </span>
+                </div>
+                <button id="bup">添加专业/科目</button>
+                <button class="needUp" id="up">上传</button>
+            </div>
+        </ol>
+    </div>
+</div>
+</body>
+</html>

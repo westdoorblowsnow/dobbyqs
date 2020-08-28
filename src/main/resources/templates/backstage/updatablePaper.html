@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:if="${paper!=null}" th:text="${paper.getName()}"></title>
+    <script src="../vue/jquery-3.5.1.js"></script>
+<!--    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>-->
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .getQuestion {
+            /*display: inline-block;*/
+            /*max-width: 700px;*/
+            /*float: left;*/
+        }
+
+        .questionStr {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #AAAAAA;
+        }
+
+        .group {
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .6), 0 0 8px rgba(0, 0, 0, .1);
+            border: 1px solid #222222;
+            padding: 8px 5px 10px 30px;
+            margin: 10px 0px;
+        }
+
+        .question {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .3), 0 0 6px rgba(0, 0, 0, .05);
+            margin: 5px 5px 5px 0px;
+            padding: 0px 10px;
+            border: 1px solid #222222;
+        }
+
+        img {
+            max-width: 700px;
+            max-height: 500px;
+        }
+
+        .paper {
+            margin: 0px 0px 10px;
+        }
+
+        #profession_subject {
+            margin-top: 40px;
+        }
+
+        #subject {
+            margin-left: 30px;
+        }
+
+        .question_img_div {
+            text-align: center;
+        }
+
+        .question_img {
+        }
+
+        /*.border{*/
+        /*    padding: 5px 10px 0px;*/
+        /*    border: solid black 1px;*/
+        /*}*/
+
+        #name {
+            margin-top: 5px;
+        }
+
+        /*.dev_answer {*/
+        /*      display: none;*/
+        /*  }*/
+
+        /*.right {*/
+        /*    display: none;*/
+        /*}*/
+
+        h4 {
+            margin: 10px 0px 5px;
+        }
+
+        /*.main{*/
+        /*    background-image: url("/dobby800_800.png");*/
+        /*}*/
+        #aann {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="border">
+        <a class="dev_answer" style="position: fixed;right: 100px;bottom: 50px;" href="#top">
+            <button>回到顶部</button>
+        </a>
+        <div th:if="${paper!=null}" class="paper">
+            <a id="aann" th:href="${'answer?paperId='+paper.getId()}" target="_blank">
+                <h1 id="name"><span th:text="${paper.getName()}"></span><span class="right"
+                                                                              th:text="${paper.getId()}"></span>
+                </h1>
+            </a>
+            <h3 id="profession_subject">
+                <span id="profession" th:if="${A1!=null}" th:text="${A1.get(0).getProfessionSubject()}"></span>
+                <!--
+                <span id="subject" th:text="${subject}"></span>
+                -->
+            </h3>
+            <h3 id="tag" th:text="${paper.getTag()}"></h3>
+        </div>
+        <div th:if="${id==null}">
+            <form method="get">
+                <input type="number" style="display: none" id="index" name="index" th:value="${index}">
+                <button class="left" type="submit" onclick="$('#index').val(Number.parseInt($('#index').val())+1)">
+                    上页试卷
+                </button>
+                <button class="right" type="submit" onclick="$('#index').val(Number.parseInt($('#index').val())-1)">
+                    下页试卷
+                </button>
+            </form>
+        </div>
+        <div>
+            <h2><span>一、</span><span th:text="${QuestionA1}"></span></h2>
+            <div class="question A12" th:each="backQuestion : ${A1}">
+                <div>
+                    <h4 class="questionStr">
+                        <a style="text-decoration: none"
+                           target="_blank"
+                           th:href="${'/backstage/Question.html?id='+backQuestion.getQuestion().getId()}">
+                            <span class="left" th:text="${numHelper.add1()+'.'}"></span>
+                            <span class="left getQuestion"
+                                  th:text="${imgHelper.rawStr(backQuestion.getQuestion().getQuestion())}"></span>
+                            <span class="right" th:text="${backQuestion.getQuestion().getId()}"></span>
+                        </a>
+                    </h4>
+                    <div class="question_img_div"
+                         th:if="${imgHelper.src(backQuestion.getQuestion().getId(),backQuestion.getQuestion().getQuestion())!=null}">
+                        <img class="question_img"
+                             th:alt="${imgHelper.src(backQuestion.getQuestion().getId(),backQuestion.getQuestion().getQuestion())}"
+                             th:src="${imgHelper.src(backQuestion.getQuestion().getId(),backQuestion.getQuestion().getQuestion())}"
+                             src="">
+                    </div>
+                </div>
+                <ol class="options" type="A">
+                    <li th:each="option : ${backQuestion.getOptions()}">
+                        <span th:text="${imgHelper.rawStr(option)}"></span>
+                        <span th:if="${imgHelper.src(backQuestion.getQuestion().getId(),option)!=null}">
+                        <img th:alt="${imgHelper.src(backQuestion.getQuestion().getId(),option)}"
+                             th:src="${imgHelper.src(backQuestion.getQuestion().getId(),option)}">
+                    </span>
+                    </li>
+                </ol>
+                <p class="dev_answer">
+                    <span>答案：</span>
+                    <span th:text="${backQuestion.getAnswer()}"></span>
+                </p>
+                <p class="dev_answer">
+                    <span>解析：</span>
+                    <span th:unless="${backQuestion.getQuestion().getExplain()==null}"
+                          th:text="${backQuestion.getQuestion().getExplain()}"></span>
+                </p>
+            </div>
+        </div>
+        <div th:if="${A3!=null}">
+            <h2><span>二、</span><span th:text="${QuestionA3}"></span></h2>
+            <div class="group" th:each="questions :${A3}">
+                <h3 th:text="${'('+(numHelper.getNum()+1)+'~'+(numHelper.getNum()+questions.size())+' 题共用题干)'}"></h3>
+                <h4 th:text="${imgHelper.rawStr(questions.get(0).getAddition())}"></h4>
+                <div th:if="${imgHelper.src(questions.get(0).getQuestion().getId(),questions.get(0).getAddition())!=null}">
+                    <img th:src="${imgHelper.src(questions.get(0).getQuestion().getId(),questions.get(0).getAddition())}">
+                </div>
+                <div class="question A34" th:each="question : ${questions}">
+                    <h4 class="questionStr">
+                        <a style="text-decoration: none"
+                           target="_blank"
+                           th:href="${'/backstage/Question.html?id='+question.getQuestion().getId()}">
+                            <span class="left" th:text="${numHelper.add1()+'.'}"></span>
+                            <span class="left getQuestion" th:text="${question.getQuestion().getQuestion()}"></span>
+                            <span class="right" th:text="${question.getQuestion().getId()}"></span>
+                        </a>
+                    </h4>
+                    <ol class="options" type="A">
+                        <li th:each="option : ${question.getOptions()}" th:text="${option}"></li>
+                    </ol>
+                    <p class="dev_answer">
+                        <span>答案：</span>
+                        <span th:text="${question.getAnswer()}"></span>
+                    </p>
+                    <p class="dev_answer" th:unless="${question.getQuestion().getExplain()==null}">
+                        <span>解析：</span>
+                        <span th:text="${question.getQuestion().getExplain()}"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div th:if="${B1!=null}">
+            <h2>
+                <span th:if="${A3==null}">二、</span>
+                <span th:if="${A3!=null}">三、</span>
+                <span th:text="${QuestionB1}"></span>
+            </h2>
+            <div class="group" th:each="questions : ${B1}">
+                <h3 th:text="${'('+(numHelper.getNum()+1)+'~'+(numHelper.getNum()+questions.size())+' 题共用备选答案)'}"></h3>
+                <ol class="options" type="A">
+                    <li th:each="option :${questions.get(0).getOptions()}">
+                        <span th:text="${imgHelper.rawStr(option)}"></span>
+                        <span th:if="${imgHelper.src(questions.get(0).getQuestion().getId(),option)!=null}">
+                        <img th:src="${imgHelper.src(questions.get(0).getQuestion().getId(),option)}">
+                    </span>
+                    </li>
+                </ol>
+                <h4 th:if="${questions.get(0).getAddition()!=null}"
+                    th:text="${questions.get(0).getAddition()}"></h4>
+                <div class="question B" th:each="question :${questions}">
+                    <h4 class="questionStr">
+                        <a style="text-decoration: none"
+                           target="_blank"
+                           th:href="${'/backstage/Question.html?id='+question.getQuestion().getId()}">
+                            <span class="left" th:text="${numHelper.add1()+'.'}"></span>
+                            <span class="left getQuestion" th:text="${question.getQuestion().getQuestion()}"></span>
+                            <span class="right" th:text="${question.getQuestion().getId()}"></span>
+                        </a>
+                    </h4>
+                    <p class="dev_answer"><span>答案：</span><span th:text="${question.getAnswer()}"></span></p>
+                    <p class="dev_answer" th:unless="${question.getQuestion().getExplain()==null}"><span>解析：</span><span
+                            th:text="${question.getQuestion().getExplain()}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

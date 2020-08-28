@@ -1,6 +1,7 @@
 package dobby.dobbyqs.mybatis.pojo;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 /**
  * diagram
@@ -56,14 +57,9 @@ public class DiagramKey implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", questionId=").append(questionId);
-        sb.append(", num=").append(num);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return new StringJoiner(", ", DiagramKey.class.getSimpleName() + "[", "]")
+                .add("questionId=" + questionId)
+                .add("num=" + num)
+                .toString();
     }
 }

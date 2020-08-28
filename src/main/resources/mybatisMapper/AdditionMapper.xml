@@ -18,6 +18,11 @@
         from dobbyqs.addition
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from dobbyqs.addition
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         <!--@mbg.generated-->
         delete from dobbyqs.addition

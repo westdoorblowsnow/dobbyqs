@@ -1,6 +1,7 @@
 package dobby.dobbyqs.mybatis.pojo;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 public class Profession implements Serializable {
     private Integer id;
@@ -46,15 +47,11 @@ public class Profession implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", code=").append(code);
-        sb.append(", name=").append(name);
-        sb.append("]");
-        return sb.toString();
+        return new StringJoiner(", ", Profession.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("code='" + code + "'")
+                .add("name='" + name + "'")
+                .toString();
     }
 
     @Override

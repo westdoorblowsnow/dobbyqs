@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:if="${paper!=null}" th:text="${paper.getName()}"></title>
+    <script src="../vue/jquery-3.5.1.js"></script>
+<!--    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>-->
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .getQuestion {
+            /*display: inline-block;*/
+            /*max-width: 700px;*/
+            /*float: left;*/
+        }
+
+        .questionStr {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #AAAAAA;
+        }
+
+        /*.group {*/
+        /*    box-shadow: 0 2px 6px rgba(0, 0, 0, .6), 0 0 8px rgba(0, 0, 0, .1);*/
+        /*    border: 1px solid #222222;*/
+        /*    padding: 8px 5px 10px 30px;*/
+        /*    margin: 10px 0px;*/
+        /*}*/
+
+        /*.question {*/
+        /*    box-shadow: 0 2px 4px rgba(0, 0, 0, .3), 0 0 6px rgba(0, 0, 0, .05);*/
+        /*    margin: 5px 5px 5px 0px;*/
+        /*    padding: 0px 10px;*/
+        /*    border: 1px solid #222222;*/
+        /*}*/
+
+        .paper {
+            margin: 0px 0px 10px;
+        }
+
+        #profession_subject {
+            margin-top: 40px;
+        }
+
+
+        .border {
+            padding: 5px 10px 0px;
+            border: solid black 1px;
+        }
+
+        p {
+            margin: 2px 0px;
+        }
+
+        #name {
+            margin-top: 5px;
+        }
+
+        /*.dev_answer {*/
+        /*    display: none;*/
+        /*}*/
+
+        .right {
+            display: none;
+        }
+
+        h4 {
+            margin: 10px 0px 5px;
+        }
+
+        /*.main{*/
+        /*    background-image: url("/dobby800_800.png");*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="border">
+        <a style="position: fixed;right: 100px;bottom: 50px;display: none" href="#top">
+            <button>回到顶部</button>
+        </a>
+        <div th:if="${paper!=null}" class="paper">
+            <h1 id="name"><span th:text="${paper.getName()+' 答案与解析'}"></span><span class="right"
+                                                                                   th:text="${paper.getId()}"></span>
+            </h1>
+            <h3 id="profession_subject">
+                <span id="profession" th:if="${A1!=null}" th:text="${A1.get(0).getProfessionSubject()}"></span>
+                <!--
+                <span id="subject" th:text="${subject}"></span>
+                -->
+            </h3>
+            <h3 id="tag" th:text="${paper.getTag()}"></h3>
+        </div>
+        <div th:if="${id==null}">
+            <form method="get">
+                <input type="number" style="display: none" id="index" name="index" th:value="${index}">
+                <button class="left" type="submit" onclick="$('#index').val(Number.parseInt($('#index').val())+1)">
+                    上页试卷
+                </button>
+                <button class="right" type="submit" onclick="$('#index').val(Number.parseInt($('#index').val())-1)">
+                    下页试卷
+                </button>
+            </form>
+        </div>
+        <div>
+            <div class="question A12" th:each="backQuestion : ${A1}">
+                <p class="dev_answer">
+                    <span class="left" th:text="${numHelper.add1()+'.'}"></span>
+                    <span th:text="${backQuestion.getAnswer()}"></span>
+                    <span></span>
+                    <span th:unless="${backQuestion.getQuestion().getExplain()==null||backQuestion.getQuestion().getExplain().equals('略。')}"
+                          th:text="${backQuestion.getQuestion().getExplain()}"></span>
+                </p>
+            </div>
+        </div>
+        <div th:if="${A3!=null}">
+            <div class="group" th:each="questions :${A3}">
+                <div class="question A34" th:each="question : ${questions}">
+                    <p class="dev_answer">
+                        <span class="left" th:text="${numHelper.add1()+'.'}"></span>
+                        <span th:text="${question.getAnswer()}"></span>
+                        <span class="dev_answer"
+                              th:unless="${question.getQuestion().getExplain()==null||question.getQuestion().getExplain().equals('略。')}">
+                            <span th:text="${question.getQuestion().getExplain()}"></span>
+                        </span>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div th:if="${B1!=null}">
+            <div class="group" th:each="questions : ${B1}">
+                <div class="question B" th:each="question :${questions}">
+                    <p class="dev_answer">
+                        <span class="left" th:text="${numHelper.add1()+'.'}"></span>
+                        <span th:text="${question.getAnswer()}"></span>
+                        <span class="dev_answer"
+                              th:unless="${question.getQuestion().getExplain()==null||question.getQuestion().getExplain().equals('略。')}">
+                        <span th:text="${question.getQuestion().getExplain()}"></span>
+                    </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
